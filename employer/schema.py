@@ -90,6 +90,109 @@ class StudentPlacementAssignmentNode(DjangoObjectType):
         interfaces = (graphene.relay.Node,)
 
 
+#Mutations
+class CreateEmployer(graphene.relay.ClientIDMutation):
+    employer = graphene.Field(EmployerNode)
+    
+    class Input:
+        employer_id = graphene.String()
+        employer_name = graphene.String()
+        description = graphene.String()
+        email = graphene.String()
+        phone = graphene.String()
+        website = graphene.String()
+        logo = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        employer = Employer(
+            employer_id = input.get('employer_id'),
+            employer_name = input.get('employer_name'),
+            description = input.get('description'),
+            email = input.get('email'),
+            phone = input.get('phone'),
+            website = input.get('website'),
+            logo = input.get('logo')
+        )
+        employer.save()
+    
+        return CreateEmployer(employer=employer)
+
+class CreateStaff(graphene.relay.ClientIDMutation):
+    staff = graphene.Field(StaffNode)
+
+    class Input:
+        staff_id = graphene.String()
+        employer_id = graphene.String() 
+        first_name = graphene.String() 
+        last_name = graphene.String() 
+        job_title = graphene.String() 
+        phone_number = graphene.String()
+        email = graphene.String()
+        other_staff_details = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        staff = Staff(
+            staff_id = input.get('staff_id'),
+            employer_id = input.get('staff_id'),
+            first_name = input.get('first_name'),
+            last_name = input.get('last_name'),
+            job_title = input.get('job_title'),
+            phone_number = input.get('phone_number'),
+            email = input.get('email'),
+            other_staff_details = input.get('other_staff_details')
+        )
+        staff.save()
+
+        return CreateStaff(staff=staff)
+
+
+
+class CreateJobType(graphene.relay.ClientIDMutation):
+    jobtype = graphene.Field(JobTypeNode)
+
+    class Input:
+        job_id = graphene.String()
+        job_type = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        jobtype = JobType(
+            job_id = input.get('job_id'),
+           job_type = input.get('job_type'),
+        )
+        jobtype.save()
+
+        return CreateJobType(jobtype=jobtype)
+        
+class CreateJobPost(graphene.relay.ClientIDMutation):
+    jobpost = graphene.Field(JobPostNode)
+
+    class Input:
+        job_post_id = graphene.String()
+        job_type = graphene.String()
+        job_post_name = graphene.String()
+        employer_id = graphene.String()
+        created_date = graphene.String() 
+        job_description = graphene.String()
+        job_requirement = graphene.String() 
+        job_location = graphene.String()
+        is_active = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        jobpost = JobPost(
+            job_post_id = input.get('job_post_id'),
+            job_type = input.get('job_type'),
+            job_post_name = input.get('job_post_name'),
+            employer_id = input.get('employer_id'),
+            created_date = input.get('created_date'), 
+            job_description = input.get('job_description'),
+            job_requirement = input.get('job_requirement'),
+            job_location = input.get('job_location'),
+            is_active = input.get('is_active').
+        )
+        jobpost.save()
+
+        return CreateJobPost(jobpost=jobpost)
+    
+
+
 class Query(object):
     employer = graphene.relay.Node.Field(EmployerNode)
     all_employers = DjangoFilterConnectionField(EmployerNode, filterset_class=EmployerFilter)
@@ -121,3 +224,7 @@ class Query(object):
     studentpalcementassignment = graphene.relay.Node.Field(StudentPlacementAssignmentNode)
     all_studentplacementassignments = DjangoFilterConnectionField(StudentPlacementAssignmentNode)
 
+class Mutation(graphene.AbstractType):
+    create_employer = CreateEmployer.Field()
+    create_staff = CreateStaff.Field()
+    create_jobtype = CreateJobType.Field()
