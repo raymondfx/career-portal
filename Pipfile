@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+graphene-django = "*"
+django-graphiql = "*"
+django-filter = "*"
+django-phone-field = "*"
+pillow = "*"
+django-taggit = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
