@@ -1,5 +1,5 @@
 # career-portal
-***How run the career-server***
+**How run the career-server**
 
 cd career-portal
 
@@ -19,7 +19,7 @@ run server
 
 open port http://127.0.0.1:8080
 
-***How to run the career portal Frontend***
+**How to run the career portal Frontend**
 
 cd Frontend
 
