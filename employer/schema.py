@@ -300,3 +300,5 @@ class Mutation(graphene.AbstractType):
     create_employer = CreateEmployer.Field()
     create_staff = CreateStaff.Field()
     create_jobtype = CreateJobType.Field()
+    update_employer = UpdateEmployer.Field()
+    update_staff = UpdateStaff.Field()
