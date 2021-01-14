@@ -264,6 +264,41 @@ class UpdateStaff(graphene.relay.ClientIDMutation):
         staff.save()
         return UpdateStaff(staff=staff)
 
+class UpdateJobType(graphene.relay.ClientIDMutation):
+    jobtype = graphene.Field(JobTypeNode)
+
+    class Input:
+        job_id = graphene.String()
+        job_type = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        jobtype.job_id = JobType.objects.get(pk=from_global_id(input.get('id'))[1])
+        jobtype.job_type = input.get('job_type')
+        jobtype.save()
+        return UpdateJobType(jobtype=jobtype)
+
+class UpdateJobPost(graphene.relay.ClientIDMutation):
+    jobpost =  graphene.Field(JobPostNode)
+
+    class Input:
+        activity_id = graphene.String()
+        student_id = graphene.String()
+        job_post_id = graphene.String() 
+        apply_date = graphene.String()
+        job_application_status = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        jobpost.activity_id = input.get('activity_id')
+        jobpost.student_id = input.get('student_id')
+        jobpost.job_post_id = input.get('job_post_id')
+        jobpost.apply_date = input.get('apply_date')
+        jobpost.job_applicatio_status = input.get('job_application_status')
+
+        jobpost.save()
+        return UpdateJobPost(jobpost=jobpost)
+
+
+
 
 class Query(object):
     employer = graphene.relay.Node.Field(EmployerNode)
@@ -300,5 +335,8 @@ class Mutation(graphene.AbstractType):
     create_employer = CreateEmployer.Field()
     create_staff = CreateStaff.Field()
     create_jobtype = CreateJobType.Field()
+    create_jobpost = CreateJobPost.Field()
     update_employer = UpdateEmployer.Field()
     update_staff = UpdateStaff.Field()
+    update_jobtype = UpdateJobType.Field()
+    update_jobpost = UpdateJobPost.Field()
