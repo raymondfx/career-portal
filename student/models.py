@@ -32,7 +32,7 @@ class Student(models.Model):
     resume = models.FileField(upload_to='documents/')
 
     def __str__(self):
-        return self.first_name , self.last_name
+        return self.first_name 
 
 class Education(models.Model):
     COURSE=(

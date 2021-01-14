@@ -1,0 +1,99 @@
+[
+    {
+        "model": "student.Student",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "username": "user1",
+            "first_name": "",
+            "middle_name": "",
+            "last_name": "",
+            "email": "user1@email.com",
+            "student_id": "001",
+            "date_of_birth": "2020-06-22",
+            "gender":"",
+            "contact_number": "",
+            "resume": ""
+        }
+    },
+    {
+        "model": "student.Student",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "username": "user2",
+            "middle_name": "",
+            "last_name": "",
+            "email": "user2@email.com",
+            "student_id": "002",
+            "date_of_birth": "2020-06-22",
+            "gender":"",
+            "contact_number": "",
+            "resume": ""
+        }
+    },
+    {
+        "model": "graphql_auth.userstatus",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "verified": true,
+            "archived": false,
+            "secondary_email": null
+        }
+    },
+    {
+        "model": "student.Student",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "username": "user3",
+            "first_name": "003",
+            "middle_name": "",
+            "last_name": "",
+            "email": "user3@email.com",
+            "student_id": "003",
+            "date_of_birth": "2020-06-22",
+            "gender":"",
+            "contact_number": "",
+            "resume": ""
+            
+        }
+    },
+    {
+        "model": "graphql_auth.userstatus",
+        "pk": 3,
+        "fields": {
+            "user": 3,
+            "verified": true,
+            "archived": true,
+            "secondary_email": null
+        }
+    },
+    {
+        "model": "student.Student",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "username": "user4",
+            "middle_name": "",
+            "last_name": "",
+            "email": "user4@email.com",
+            "student_id": "004",
+            "date_of_birth": "2020-06-22",
+            "gender":"",
+            "contact_number": "",
+            "resume": ""
+        }
+    },
+    {
+        "model": "graphql_auth.userstatus",
+        "pk": 4,
+        "fields": {
+            "user": 4,
+            "verified": true,
+            "archived": false,
+            "secondary_email": "user4_secondary@email.com"
+        }
+    }
+  ]

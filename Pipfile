@@ -11,6 +11,7 @@ django-filter = "*"
 django-phone-field = "*"
 pillow = "*"
 django-taggit = "*"
+django-graphql-auth = "*"
 
 [dev-packages]
 

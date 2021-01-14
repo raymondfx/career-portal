@@ -35,6 +35,8 @@ class StudentPlacementAdmin(admin.ModelAdmin):
 class StudentPlacementAssignmentAdmin(admin.ModelAdmin):
     fields = ('assignment_id', 'student_id', 'employer_id', 'assignment_start_date','assignment_end_date','supervisor', 'comments_by_supervisor', 'comments_by_student', 'other_assignment_details')
 
+
+
 admin.site.register(Employer, EmployerAdmin)
 admin.site.register(Staff, StaffAdmin)
 admin.site.register(JobType, JobTypeAdmin)

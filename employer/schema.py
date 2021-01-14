@@ -6,6 +6,7 @@ from graphene_django.converter import convert_django_field
 from taggit.managers import TaggableManager
 from graphene import String
 import django_filters
+from graphql_relay.node.node import from_global_id #for updating
 
 @convert_django_field.register(TaggableManager)
 def convert_field_to_string(field, registry=None):
@@ -90,7 +91,7 @@ class StudentPlacementAssignmentNode(DjangoObjectType):
         interfaces = (graphene.relay.Node,)
 
 
-#Mutations
+#Create Mutations
 class CreateEmployer(graphene.relay.ClientIDMutation):
     employer = graphene.Field(EmployerNode)
     
@@ -160,7 +161,7 @@ class CreateJobType(graphene.relay.ClientIDMutation):
         jobtype.save()
 
         return CreateJobType(jobtype=jobtype)
-        
+
 class CreateJobPost(graphene.relay.ClientIDMutation):
     jobpost = graphene.Field(JobPostNode)
 
@@ -185,12 +186,83 @@ class CreateJobPost(graphene.relay.ClientIDMutation):
             job_description = input.get('job_description'),
             job_requirement = input.get('job_requirement'),
             job_location = input.get('job_location'),
-            is_active = input.get('is_active').
+            is_active = input.get('is_active'),
         )
         jobpost.save()
 
         return CreateJobPost(jobpost=jobpost)
+
+class CreateJobPostActivity(graphene.relay.ClientIDMutation):
+    jobpostactivity = graphene.Field(JobTypeNode)
+
+    class Input:
+        activity_id = graphene.String()
+        student_id = graphene.String()
+        job_post_id = graphene.String() 
+        apply_date = graphene.String()
+        job_application_status = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        jobpostactivity = JobPostActivity(
+            activity_id = input.get('activity_id'),
+            student_id = input.get('student_id'),
+            job_post_id = input.get('job_post_id'),
+            apply_date = input.get('apply_date'),
+            job_application_status = input.get('job_application_status'),
+        )
+        jobpostactivity.save()
+
+        return CreateJobPostActivity(jobpostactivity=jobpostactivity)
     
+#Update Class
+
+class UpdateEmployer(graphene.relay.ClientIDMutation):
+    employer = graphene.Field(EmployerNode)
+
+    class Input:
+        employer_id = graphene.String()
+        employer_name = graphene.String()
+        description = graphene.String()
+        email = graphene.String()
+        phone = graphene.String()
+        website = graphene.String()
+        logo = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+
+        employer = Employer.objects.get(pk=from_global_id(input.get('id'))[1])
+        employer.employer_name = input.get('employee_name')
+        employer.description = input.get('description')
+        employer.email = input.get('email')
+        employer.phone = input.get('phone')
+        employer.website =  input.get('website')
+        employer.logo = input.get('logo')
+        #employee.employee_city = City.objects.get(city_name=input.get(‘employee_city’))
+        #employee.employee_title = Title.objects.get(title_name=input.get(‘employee_title’))
+        employer.save()
+        return UpdateEmployer(employer=employer)
+
+class UpdateStaff(graphene.relay.ClientIDMutation):
+    staff = graphene.Field(StaffNode)
+
+    class Input:
+        staff_id = graphene.String()
+        employer_id = graphene.String() 
+        first_name = graphene.String() 
+        last_name = graphene.String() 
+        job_title = graphene.String() 
+        phone_number = graphene.String()
+        email = graphene.String()
+        other_staff_details = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        staff.staff_id = Staff.objects.get(pk=from_global_id(input.get('id'))[1])
+        staff.employer_id = Employer.objects.get(employer_id=input.get('employer_id'))
+        staff.first_name = input.get('first_name')
+        staff.last_name = input.get('last_name')
+        staff.job_title = input.get('job_title')
+        staff.phone_number = input.get('phone_number')
+        staff.save()
+        return UpdateStaff(staff=staff)
 
 
 class Query(object):
