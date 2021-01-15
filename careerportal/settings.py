@@ -112,7 +112,12 @@ AUTHENTICATION_BACKENDS = [
     
     "graphql_auth.backends.GraphQLAuthBackend",
 
+
 ]
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
