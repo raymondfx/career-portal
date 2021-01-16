@@ -73,7 +73,7 @@ class Student_Interview_OutcomeNode(DjangoObjectType):
 
     class Meta:
         model = Student_Interview_Outcome
-        filter_fields = ['interview_outcome_id', 'student_id', 'interview_outcome_description']
+        filter_fields = ['interview_outcome_id', 'student_id', 'interview_outcome']
         interfaces = (graphene.relay.Node,)
 
 class StudentPlacementNode(DjangoObjectType):

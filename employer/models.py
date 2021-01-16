@@ -94,9 +94,14 @@ class StudentInterview(models.Model):
         return self.student_interview_id
 
 class Student_Interview_Outcome(models.Model):
+    OUTCOME =(
+        ('P','Pending'),
+        ('A','Accepted'),
+        ('R', 'Rejected')
+    )
     interview_outcome_id = models.CharField(max_length=30)
     student_id = models.ForeignKey('student.Student', on_delete=models.CASCADE)
-    interview_outcome_description = models.CharField(max_length=30)
+    interview_outcome = models.CharField(max_length=30, choices = OUTCOME, default='P')
 
     def __str__(self):
         return self.interview_outcome_id

@@ -27,7 +27,7 @@ class StudentInterviewAdmin(admin.ModelAdmin):
     fields = ('student_interview_id', 'student_id', 'employer_id', 'interview_datetime', 'student_interview_outcome', 'comment_by_employer', 'other_interview_details')
 
 class Student_Interview_OutcomeAdmin(admin.ModelAdmin):
-    fields = ('interview_outcome_id', 'student_id', 'interview_outcome_description')
+    fields = ('interview_outcome_id', 'student_id', 'interview_outcome')
 
 class StudentPlacementAdmin(admin.ModelAdmin):
     fields = ('student_id', 'employer_id', 'placement_start_date', 'placement_manager_staffid', 'placement_end_date', 'comment_by_employer', 'comments_by_student', 'other_placement_details')
