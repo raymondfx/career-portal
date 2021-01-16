@@ -82,29 +82,23 @@ class JobLocation(models.Model):
 
 
 class StudentInterview(models.Model):
-    student_interview_id = models.CharField(max_length=30)
-    student_id = models.ForeignKey('student.Student', on_delete=models.CASCADE)
-    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    student_interview_outcome = models.CharField(max_length=30)
-    interview_datetime = models.DateField()
-    comment_by_employer = models.CharField(max_length=30)
-    other_interview_details = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.student_interview_id
-
-class Student_Interview_Outcome(models.Model):
     OUTCOME =(
         ('P','Pending'),
         ('A','Accepted'),
         ('R', 'Rejected')
     )
-    interview_outcome_id = models.CharField(max_length=30)
+    student_interview_id = models.CharField(max_length=30)
     student_id = models.ForeignKey('student.Student', on_delete=models.CASCADE)
+    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    job_post_id = models.ForeignKey(JobPost, on_delete=models.CASCADE)
+    interview_datetime = models.DateField()
+    comment_by_employer = models.CharField(max_length=30)
+    other_interview_details = models.CharField(max_length=30)
     interview_outcome = models.CharField(max_length=30, choices = OUTCOME, default='P')
 
     def __str__(self):
-        return self.interview_outcome_id
+        return self.student_interview_id
+
 
 class StudentPlacement(models.Model):
     student_id = models.ForeignKey('student.Student', on_delete=models.CASCADE)

@@ -66,15 +66,9 @@ class StudentInterviewNode(DjangoObjectType):
 
     class Meta:
         model = StudentInterview
-        filter_fields = ['student_interview_id', 'student_id', 'employer_id', 'interview_datetime', 'student_interview_outcome', 'comment_by_employer', 'other_interview_details']
+        filter_fields = ['student_interview_id', 'student_id', 'employer_id', 'job_post_id' 'interview_datetime', 'comment_by_employer', 'other_interview_details', 'interview_outcome']
         interfaces = (graphene.relay.Node,)
 
-class Student_Interview_OutcomeNode(DjangoObjectType):
-
-    class Meta:
-        model = Student_Interview_Outcome
-        filter_fields = ['interview_outcome_id', 'student_id', 'interview_outcome']
-        interfaces = (graphene.relay.Node,)
 
 class StudentPlacementNode(DjangoObjectType):
 
@@ -322,8 +316,6 @@ class Query(object):
     studentinterview = graphene.relay.Node.Field(StudentInterviewNode)
     all_studentinterviews = DjangoFilterConnectionField(StudentInterviewNode)
 
-    studentinterviewoutcome = graphene.relay.Node.Field(Student_Interview_OutcomeNode)
-    all_studentinterviewoutcomes = DjangoFilterConnectionField(Student_Interview_OutcomeNode)
 
     studentplacement = graphene.relay.Node.Field(StudentPlacementNode)
     all_studentplacements = DjangoFilterConnectionField(StudentPlacementNode)

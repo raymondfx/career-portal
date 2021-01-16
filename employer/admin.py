@@ -24,10 +24,7 @@ class JobLocationAdmin(admin.ModelAdmin):
 
 
 class StudentInterviewAdmin(admin.ModelAdmin):
-    fields = ('student_interview_id', 'student_id', 'employer_id', 'interview_datetime', 'student_interview_outcome', 'comment_by_employer', 'other_interview_details')
-
-class Student_Interview_OutcomeAdmin(admin.ModelAdmin):
-    fields = ('interview_outcome_id', 'student_id', 'interview_outcome')
+    fields = ('student_interview_id', 'student_id', 'employer_id','job_post_id', 'interview_datetime', 'comment_by_employer', 'other_interview_details', 'interview_outcome')
 
 class StudentPlacementAdmin(admin.ModelAdmin):
     fields = ('student_id', 'employer_id', 'placement_start_date', 'placement_manager_staffid', 'placement_end_date', 'comment_by_employer', 'comments_by_student', 'other_placement_details')
@@ -44,6 +41,5 @@ admin.site.register(JobPost, JobPostAdmin)
 admin.site.register(JobPostActivity, JobPostActivityAdmin)
 admin.site.register(JobLocation, JobLocationAdmin)
 admin.site.register(StudentInterview, StudentInterviewAdmin)
-admin.site.register(Student_Interview_Outcome, Student_Interview_OutcomeAdmin)
 admin.site.register(StudentPlacement, StudentPlacementAdmin)
 admin.site.register(StudentPlacementAssignment, StudentPlacementAssignmentAdmin)
