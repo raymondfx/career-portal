@@ -6,6 +6,7 @@ from graphene_django.converter import convert_django_field
 from taggit.managers import TaggableManager
 from graphene import String
 import django_filters
+from graphql_relay.node.node import from_global_id
 # convert TaggableManager to string representation
 @convert_django_field.register(TaggableManager)
 def convert_field_to_string(field, registry=None):
@@ -53,6 +54,118 @@ class AppliedJobNode(DjangoObjectType):
         model = AppliedJob
         filter_fields = ['student_id', 'employer_id', 'job_post_id']
         interfaces = (graphene.relay.Node,)
+#Create Schema Function
+class CreateStudent(graphene.relay.ClientIDMutation):
+    student = graphene.Field(StudentNode)
+
+    class Input:
+        username = graphene.String()
+        password = graphene.String()
+        confirm_password = graphene.String()
+        student_id = graphene.String()
+        first_name = graphene.String()
+        middle_name = graphene.String()
+        last_name = graphene.String()
+        email = graphene.String()
+        date_of_birth = graphene.String()
+        gender = graphene.String()
+        contact_number = graphene.String()
+        resume = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        student = Student(
+            username = input.get('username'),
+            password = input.get('password'),
+            confirm_password = input.get('confirm_password'),
+            student_id = input.get('student_id'),
+            first_name = input.get('first_name'),
+            middle_name = input.get('middle_name'),
+            last_name = input.get('last_name'),
+            email = input.get('email'),
+            date_of_birth = input.get('date_of_birth'),
+            gender = input.get('gender'),
+            contact_number = input.get('contact_number'),
+            resume = input.get('resume'),
+        )
+        student.save()
+        return CreateStudent(student=student)
+
+class CreateEducation(graphene.relay.ClientIDMutation):
+    eduaction = graphene.Field(EducationNode)
+
+    class Input:
+        course_type = graphene.String()
+        course_name = graphene.String()
+        major = graphene.String()
+        institution_name = graphene.String()
+        starting_date = graphene.String()
+        completion_date = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        education = Education(
+            course_type = input.get('course_type'),
+            course_name = input.get('course_name'),
+            major = input.get('major'),
+            institution_name = input.get('institution_name'),
+            starting_date = input.get('starting_date'),
+            completion_date = input.get('completion_date'),
+        )
+        education.save()
+        return CreateEducation(education=education)
+
+class CreateExperience(graphene.relay.ClientIDMutation):
+    experience = graphene.Field(ExperienceNode)
+
+    class Input:
+        employer_name = graphene.String()
+        job_title = graphene.String()
+        is_current_job = graphene.String()
+        start_date = graphene.String()
+        end_date = graphene.String()
+        job_description = graphene.String()
+        location = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        experience = Experience(
+            employer_name = input.get('employer_name'),
+            job_title = input.get('job_title'),
+            is_current_job = input.get('is_current_job'),
+            start_date = input.get('start_date'),
+            end_date = input.get('end_date'),
+            job_description = input.get('job_description'),
+            location = input.get('location'),
+        )
+        experience.save()
+        return CreateExperience(experience=experience)
+
+
+class CreateSkill(graphene.relay.ClientIDMutation):
+    skill = graphene.Field(SkillNode)
+
+    class Input:
+        skill_id = graphene.String()
+        skill_name = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        skill = Skill(
+          skill_id = input.get('skill_id'),
+          skill_name = input.get('skill_name'),
+        )
+        skill.save()
+        return CreateSkill(skill=skill)
+
+class CreateAppliedJob(graphene.relay.ClientIDMutation):
+    appliedjob = graphene.Field(AppliedJobNode)
+
+    class Input:
+        student_id = graphene.String()
+        employer_id = graphene.String()
+        job_post_id = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        appliedjob = AppliedJob(
+          student_id = input.get('student_id'),
+          employer_id = input.get('employer_id'),
+          job_post_id = input.get('job_post_id'),
+        )
+        appliedjob.save()
+        return CreateAppliedJob(appliedjob=appliedjob)
+
 class Query(object):
     student = graphene.relay.Node.Field(StudentNode)
     all_students = DjangoFilterConnectionField(StudentNode, filterset_class=StudentFilter)
@@ -69,3 +182,9 @@ class Query(object):
     appliedjob = graphene.relay.Node.Field(AppliedJobNode)
     all_appliedjobs = DjangoFilterConnectionField(AppliedJobNode)
 
+class Mutation(graphene.AbstractType):
+    create_student = CreateStudent.Field()
+    create_education = CreateEducation.Field()
+    create_experience = CreateExperience.Field()
+    create_skill = CreateSkill.Field()
+    create_appliedjob = CreateAppliedJob.Field()
