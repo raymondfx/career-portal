@@ -759,6 +759,7 @@ class Mutation(graphene.AbstractType):
     create_studentinterview = CreateStudentInterview.Field()
     create_studentplacement = CreateStudentPlacement.Field()
     create_studentplacmentassignement = CreateStudentPlacementAssignment.Field()
+
     update_employer = UpdateEmployer.Field()
     update_staff = UpdateStaff.Field()
     update_jobtype = UpdateJobType.Field()
@@ -768,6 +769,7 @@ class Mutation(graphene.AbstractType):
     update_studentinterview = UpdateStudentInterview.Field()
     update_studentplacement = UpdateStudentPlacement.Field()
     update_studentplacmentassignement = UpdateStudentPlacementAssignment.Field()
+    
     delete_employer = DeleteEmployer.Field()
     delete_staff = DeleteStaff.Field()
     delete_jobtype = DeleteJobType.Field()

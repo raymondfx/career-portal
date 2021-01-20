@@ -76,7 +76,7 @@ class Skill(models.Model):
         return self.skill_id
 
 class AppliedJob(models.Model):
-    student_id= models.CharField(max_length=9, blank=False, help_text="enter username ex:y16it***", default="y1")
+    student_id= models.CharField(max_length=30)
     employer_id = models.ForeignKey(Employer,on_delete=models.CASCADE)
     job_post_id = models.ForeignKey(JobPost, on_delete=models.CASCADE)
 

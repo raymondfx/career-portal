@@ -41,8 +41,7 @@ class Event(models.Model):
     def __str__(self):
         return self.event_title
 
-class StudentEventAttendee(models.Model):
-    student_id = models.ForeignKey('student.Student', on_delete=models.CASCADE)
+class EventAttendee(models.Model):
     event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -52,11 +51,3 @@ class StudentEventAttendee(models.Model):
     def __str__(self):
         return self.event_id
 
-class EmployerEventAttendee(models.Model):
-    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    employer_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
-    phone_number = PhoneField(max_length=30)
-
-    def __str__(self):
-        return self.organisation_name

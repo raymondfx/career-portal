@@ -33,6 +33,6 @@ class AuthMutation(graphene.ObjectType):
 
 class Query(student.schema.Query,employer.schema.Query, institution.schema.Query,UserQuery, MeQuery, graphene.ObjectType):
     pass
-class Mutation(employer.schema.Mutation, graphene.ObjectType):
+class Mutation(employer.schema.Mutation, student.schema.Mutation, institution.schema.Mutation, graphene.ObjectType):
     pass
 schema = graphene.Schema(query=Query, mutation=Mutation)
