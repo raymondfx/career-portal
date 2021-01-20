@@ -66,7 +66,7 @@ class StudentInterviewNode(DjangoObjectType):
 
     class Meta:
         model = StudentInterview
-        filter_fields = ['student_interview_id', 'student_id', 'employer_id', 'job_post_id' 'interview_datetime', 'comment_by_employer', 'other_interview_details', 'interview_outcome']
+        filter_fields = ['student_interview_id', 'student_id', 'employer_id', 'job_post_id' ,'interview_datetime', 'comment_by_employer', 'other_interview_details', 'interview_outcome']
         interfaces = (graphene.relay.Node,)
 
 
@@ -206,7 +206,111 @@ class CreateJobPostActivity(graphene.relay.ClientIDMutation):
         jobpostactivity.save()
 
         return CreateJobPostActivity(jobpostactivity=jobpostactivity)
+class CreateJobLocation(graphene.relay.ClientIDMutation):
+    joblocation =  graphene.Field(JobLocationNode)
+
+    class Input:
+        location_id = graphene.String()
+        street_address = graphene.String()
+        city = graphene.String()
+        county = graphene.String()
+        country = graphene.String()
+        zip_code = graphene.String()
+    def mutate_and_get_payload(root, info, **input):
+        joblocatio = JobLocation(
+            location_id = input.get('location_id'),
+            street_address = input.get('street_address'),
+            city = input.get('city'),
+            county = input.get('county'),
+            country = input.get('country'),
+            zip_code = input.get('zip_code'),
+        )
+        joblocation.save()
+
+        return CreateJobLocation(joblocation=joblocation)
+class CreateStudentInterview(graphene.relay.ClientIDMutation):
+    studentinterview = graphene.Field(StudentInterviewNode)
+
+    class Input:
+        student_interview_id = graphene.String()
+        student_id = graphene.String()
+        employer_id = graphene.String()
+        job_post_id = graphene.String()
+        interview_datetime = graphene.String()
+        comment_by_employer = graphene.String()
+        other_interview_details = graphene.String()
+        interview_outcome = graphene.String()
     
+    def mutate_and_get_payload(root, info, **input):
+        studentinterview = StudentInterview(
+            student_interview_id = input.get('student_interview_id'),
+            student_id = input.get('student_id'),
+            employer_id = input.get('employer_id'),
+            job_post_id = input.get('job_post_id'),
+            interview_datetime = input.get('interview_datetime'),
+            comment_by_employer = input.get('comment_by_employer'),
+            other_interview_details = input.get('other_interview_details'),
+            interview_outcome = input.get('interview_outcome'),
+        )
+        studentinterview.save()
+        return CreateStudentInterview(studentinterview =  studentinterview)
+
+class CreateStudentPlacement(graphene.relay.ClientIDMutation):
+    studentplacement = graphene.Field(StudentPlacementNode)
+
+    class Input:
+        student_id = graphene.String()
+        employer_id = graphene.String()
+        placement_start_date = graphene.String()
+        placement_manager_staffid = graphene.String()
+        placement_end_date = graphene.String()
+        comment_by_employer = graphene.String()
+        comments_by_student = graphene.String()
+        other_placement_details = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        studentplacement = StudentPlacement(
+            student_id = input.get('student_id')
+            employer_id = input.get('employer_id')
+            placement_start_date = input.get('placement_start_date')
+            placement_manager_staffid = input.get('placement_manager_staffid')
+            placement_end_date = input.get('placement_end_date')
+            comment_by_employer = input.get('comment_by_employer')
+            comments_by_student = input.get('comments_by_student')
+            other_placement_details = input.get('other_placement_details')
+        )
+        studentplacement()
+        return CreateStudentPlacement(studentplacement = studentplacement)
+
+class CreateStudentPlacementAssignment(graphene.relay.ClientIDMutation):
+    studentplacementassignment = graphene.Field(StudentPlacementAssignmentNode)
+
+    class Input:
+        assignment_id = graphene.String()
+        student_id = graphene.String()
+        employer_id = graphene.String()
+        assignment_start_date = graphene.String()
+        assignment_end_date = graphene.String()
+        supervisor = graphene.String()
+        comments_by_supervisor = graphene.String()
+        comments_by_student = graphene.String()
+        other_assignment_details = graphene.String()
+
+    def mutate_and_get_payload(root, info, **input):
+        studentpalcementassignment = StudentPlacementAssignment(
+            assignment_id = input.get('assignement_id')
+            student_id = input.get('student_id')
+            employer_id = input.get('employer_id')
+            assignment_start_date = input.get('assignment_start_date')
+            assignment_end_date = input.get('assignment_end_date')
+            supervisor = input.get('supervisor')
+            comments_by_supervisor = input.get('comments_by_supervisor')
+            comments_by_student = input.get('comments_by_student')
+            other_assignment_details = input.get('other_assignment_details')
+        )
+        studentpalcementassignment()
+        return CreateStudentPlacementAssignment(studentassignment = studentassignment)
+
 #Update Class
 
 class UpdateEmployer(graphene.relay.ClientIDMutation):
