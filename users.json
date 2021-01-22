@@ -1,35 +1,32 @@
 [
     {
-        "model": "student.Student",
+        "model": "account.CustomUser",
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "last_login": null,
+            "is_superuser": false,
             "username": "user1",
             "first_name": "",
-            "middle_name": "",
             "last_name": "",
             "email": "user1@email.com",
-            "student_id": "001",
-            "date_of_birth": "2020-06-22",
-            "gender":"",
-            "contact_number": "",
-            "resume": ""
+            "is_staff": false,
+            "is_active": true
         }
     },
     {
-        "model": "student.Student",
+        "model": "account.CustomUser",
         "pk": 2,
         "fields": {
             "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "last_login": null,
+            "is_superuser": false,
             "username": "user2",
-            "middle_name": "",
+            "first_name": "",
             "last_name": "",
             "email": "user2@email.com",
-            "student_id": "002",
-            "date_of_birth": "2020-06-22",
-            "gender":"",
-            "contact_number": "",
-            "resume": ""
+            "is_staff": false,
+            "is_active": true
         }
     },
     {
@@ -43,21 +40,18 @@
         }
     },
     {
-        "model": "student.Student",
+        "model": "account.CustomUser",
         "pk": 3,
         "fields": {
             "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "last_login": null,
+            "is_superuser": false,
             "username": "user3",
-            "first_name": "003",
-            "middle_name": "",
+            "first_name": "",
             "last_name": "",
             "email": "user3@email.com",
-            "student_id": "003",
-            "date_of_birth": "2020-06-22",
-            "gender":"",
-            "contact_number": "",
-            "resume": ""
-            
+            "is_staff": false,
+            "is_active": true
         }
     },
     {
@@ -71,19 +65,18 @@
         }
     },
     {
-        "model": "student.Student",
+        "model": "account.CustomUser",
         "pk": 4,
         "fields": {
             "password": "pbkdf2_sha256$180000$nFcBtiqGnWN9$hf58wNg77oT1BlNKRdATVVvBIa69+dz22fL1JKOKTaA=",
+            "last_login": null,
+            "is_superuser": false,
             "username": "user4",
-            "middle_name": "",
+            "first_name": "",
             "last_name": "",
             "email": "user4@email.com",
-            "student_id": "004",
-            "date_of_birth": "2020-06-22",
-            "gender":"",
-            "contact_number": "",
-            "resume": ""
+            "is_staff": false,
+            "is_active": true
         }
     },
     {

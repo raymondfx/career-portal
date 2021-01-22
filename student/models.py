@@ -3,7 +3,7 @@ from institution.models import *
 from employer.models import *
 from phone_field import PhoneField
 from taggit.managers import TaggableManager
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 """
 def content_file_name(instance, filename):

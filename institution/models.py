@@ -2,6 +2,7 @@ from django.db import models
 from employer.models import *
 from student.models import *
 from phone_field import PhoneField
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 def content_file_name(instance, filename):

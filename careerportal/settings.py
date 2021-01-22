@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'employer',
     'institution',
     'phone_field',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -107,18 +108,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-AUTHENTICATION_BACKENDS = [
-    
-    "graphql_auth.backends.GraphQLAuthBackend",
-
-
-]
 AUTHENTICATION_BACKENDS = (
-    ('django.contrib.auth.backends.ModelBackend'),
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'graphql_auth.backends.GraphQLAuthBackend',
 )
 
-
+AUTH_USER_MODEL = 'account.CustomUser'
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -142,7 +138,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 GRAPHENE = {
- 'SCHEMA': 'careerportal.schema.schema'
+ 'SCHEMA': 'careerportal.schema.schema',
+ 'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
 
 

@@ -12,6 +12,8 @@ django-phone-field = "*"
 pillow = "*"
 django-taggit = "*"
 django-graphql-auth = "*"
+django-graphql-jwt = "==0.3.0"
+pyjwt = "==1.7.0"
 
 [dev-packages]
 

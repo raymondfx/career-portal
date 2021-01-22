@@ -2,7 +2,7 @@ from django.db import models
 from student.models import *
 from phone_field import PhoneField
 from taggit.managers import TaggableManager
-
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
