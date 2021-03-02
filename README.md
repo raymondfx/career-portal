@@ -23,7 +23,7 @@ run server
 python3 manage.py runserver
 ```
 
-open port http://127.0.0.1:8080
+open port http://127.0.0.1:8080/graphiql
 
 **GraphiQL Explorer**
 
